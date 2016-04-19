@@ -11,4 +11,9 @@ public class Node
 		value = x;
 		left = right = null;
 	}
+	
+	public String toString()
+	{
+		return value.toString();
+	}
 }

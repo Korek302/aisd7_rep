@@ -4,18 +4,18 @@ public class BST implements Tree
 {
 	Node root;
 	
-	private Node search(Object value)
+	private Node search(int value)
 	{
 		Node node = root;
 		int cmp = 0;
-		while(node != null && (cmp = ((Vehicle) value).compareTo((Vehicle) node.value)) != 0)
+		while(node != null && (cmp = value - node.value.age) != 0)
 		{
 			node = cmp < 0 ? node.left : node.right;
 		}
 		return node;
 	}
 	
-	public Object find(Object x)
+	public Object find(int x)
 	{
 		Node t = search(x);
 		return t != null ? t.value : null;
@@ -38,7 +38,7 @@ public class BST implements Tree
 			}
 			else
 			{
-				t.value = (Vehicle) x; //??????????????????????????????
+				t.value = (Vehicle) x;
 			}
 		}
 		return t;
@@ -63,13 +63,13 @@ public class BST implements Tree
 		return t;
 	}
 	
-	private Node delete(Object x, Node t)
+	private Node delete(int x, Node t)
 	{
 		if(t == null)
 			;
 		else
 		{
-			int cmp = ((Vehicle) x).compareTo((Vehicle) t.value);
+			int cmp = x - t.value.age;
 			if(cmp < 0)
 			{
 				t.left = delete(x, t.left);
@@ -90,8 +90,33 @@ public class BST implements Tree
 		return t;
 	}
 	
-	public void delete(Object x)
+	public void delete(int x)
 	{
 		root = delete(x, root);
+	}
+	
+	/*public String toString()
+	{
+		return root.toString();
+	}
+	
+	public String toString(Node root)
+	{
+	    StringBuilder builder = new StringBuilder();
+	    if (root == null)
+	        return "";
+	    builder.append(toString(root.left));
+	    builder.append(toString(root.right));
+	    return builder.append(root.value.toString()).toString();
+	}*/
+	public String toString(Node root)
+	{
+	    String result = "";
+	    if (root == null)
+	        return "";
+	    result += toString(root.left);
+	    result += toString(root.right);
+	    result += root.toString();
+	    return result;
 	}
 }

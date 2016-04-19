@@ -8,8 +8,8 @@ public class BinarySearch2 implements ArraySearcher
 		counter ++;
 		if(lower > upper)
 			return -(lower +1);
-		int index = lower + ((upper - lower) / (upper - lower))*(value - lower);
-		int cmp = value - index;
+		int index = lower + ((value - arr[lower])*(upper - lower))/(arr[upper] - arr[lower]);
+		int cmp = value - arr[index];
 		if(cmp > 0) 
 			return binarySearch(arr, value, index + 1, upper);
 		if(cmp < 0) 
@@ -19,7 +19,7 @@ public class BinarySearch2 implements ArraySearcher
 
 	public int search(int[] arr, int value)
 	{
-		return binarySearch(arr, value, arr[0], arr.length - 1);
+		return binarySearch(arr, value, 0, arr.length - 1);
 	}
 	
 }
